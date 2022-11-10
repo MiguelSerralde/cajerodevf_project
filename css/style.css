@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;    
+    box-sizing: border-box;
+}
+
+body {    
+    display: flex;    
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #123464;
+}
+
+.logo {
+    margin-top: -250px;
+    margin-bottom: 150px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-items: auto;
+}
+
+.logo img {
+    width: 120px;
+    height: 120px;
+    margin-right: 20px;
+}
+
+.bank-name {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+}
+
+.bank-name h2 {
+    align-self: flex-start;
+    font-size: 46px; 
+    font-style: italic;   
+    font-weight: bolder;
+}
+
+.bank-name p{
+    align-self: flex-start;
+    font-style: unset;
+    color:#3CB1F3;
+}
+
+.contenedor {
+    border: 1px solid white;    
+    border-radius: 6px;
+    background-color: #122243;
+    width: 300px;
+    height: 150px;
+}
+
+form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+label{
+    font-weight: bolder;
+    color: white;
+}
+
+.error {
+    margin-top: -20px;
+    color: red;    
+    font-weight: bold;
+    font-size: 17px;    
+}
+
+.hide {
+    display: none;
+}
+
+.submit-buton {
+    border-radius: 6px;
+    width: 50px;
+    height: 25px;
+}

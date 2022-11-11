@@ -1,10 +1,8 @@
 const fornmDom = document.getElementById('formulario')
-const userbd = 'Miguel'
-const passbd = '123'
 
 var cuentas = [
     {nombre: 'Mali', paswword: '123', saldo: 200},
-    {nombre: 'Gera', paswword: '123', saldo: 290},
+    {nombre: 'Gera', paswword: '321', saldo: 290},
     {nombre: 'Maui', paswword: '123', saldo: 67}
 ]
 
@@ -19,13 +17,6 @@ function login(userDom, passDom){
             mostrarError()
         }
     }
-
-    // if (userbd === userDom && passbd === passDom){
-    //     alert('Acceso Correcto')
-    // }
-    // else {
-    //     mostrarError()
-    // }
 }
 
 function mostrarError(){

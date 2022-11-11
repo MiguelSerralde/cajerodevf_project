@@ -1,17 +1,20 @@
 const fornmDom = document.getElementById('formulario')
+const contenedorDom = document.getElementById('contenedor')
+const bodyDom = document.getElementById('principal')
 
-var cuentas = [
+let cuentas = [
     {nombre: 'Mali', paswword: '123', saldo: 200},
     {nombre: 'Gera', paswword: '321', saldo: 290},
-    {nombre: 'Maui', paswword: '123', saldo: 67}
+    {nombre: 'Maui', paswword: '123', saldo: 67},
+    {nombre: 'Miguel', paswword: '123', saldo: 67}    
 ]
-
-console.log(cuentas[0].nombre)
+const numeroCuentas = cuentas.length
 
 function login(userDom, passDom){
-    for (i = 0; i <= 2; i++){
-        if (cuentas[i].nombre == userDom && cuentas[i].paswword == passDom){
-            alert("Login correcto")
+    for (let i = 0; i < numeroCuentas; i++){
+        if (cuentas[i].nombre == userDom && cuentas[i].paswword == passDom){            
+            eliminarElentosHTML()  
+            pantallaPrincipal()          
         }
         else {
             mostrarError()
@@ -38,3 +41,36 @@ fornmDom.addEventListener('submit', (evento)=> {
     login(userDom, passDom)
 })
 
+function eliminarElentosHTML() {
+    let formDom = contenedorDom.querySelector('#formulario') 
+    let errorDelete = bodyDom.querySelector('#errorLogin')
+    contenedorDom.removeChild(formDom)
+    bodyDom.removeChild(errorDelete)   
+}
+
+function pantallaPrincipal() {
+    document.getElementById('logo').style.marginBottom = '20px'
+    document.getElementById('logo').style.marginTop = '0px'    
+    document.getElementById('contenedor').classList.remove('contenedor')
+    document.getElementById('contenedor').classList.add('contenedor-2')
+
+    const botonConsulta = document.createElement('button')
+    const botonRetiro = document.createElement('button')
+    const botonDeposito = document.createElement('button')
+    const botonSalir = document.createElement('button')
+    
+    botonConsulta.innerText = 'Consulta de Saldo'
+    botonRetiro.innerText = 'Retiro de efectivo'
+    botonDeposito.innerText = 'Deposito'
+    botonSalir.innerText = 'Salir'
+
+    document.getElementById('contenedor').appendChild(botonConsulta)
+    document.getElementById('contenedor').appendChild(botonRetiro) 
+    document.getElementById('contenedor').appendChild(botonDeposito)       
+    document.getElementById('contenedor').appendChild(botonSalir)    
+
+    botonConsulta.classList.add('boton_consulta')
+    botonRetiro.classList.add('boton_consulta')  
+    botonDeposito.classList.add('boton_consulta')  
+    botonSalir.classList.add('boton_consulta')
+}

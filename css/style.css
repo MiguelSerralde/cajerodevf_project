@@ -15,8 +15,9 @@ body {
 }
 
 .logo {
-    margin-top: -250px;
-    margin-bottom: 150px;
+    margin-top: -150px;
+    margin-bottom: 100px;
+    margin-left: -40px;
     color: white;
     display: flex;
     flex-direction: row;
@@ -24,9 +25,9 @@ body {
 }
 
 .logo img {
-    width: 120px;
-    height: 120px;
-    margin-right: 20px;
+    width: 180px;
+    height: 180px;
+    margin-right: 10px;
 }
 
 .bank-name {
@@ -41,6 +42,7 @@ body {
     font-size: 46px; 
     font-style: italic;   
     font-weight: bolder;
+    text-shadow: 1px 2px #123464;
 }
 
 .bank-name p{
@@ -50,11 +52,15 @@ body {
 }
 
 .contenedor {
-    border: 1px solid white;    
+    border: 1px solid rgb(180, 179, 236);    
     border-radius: 6px;
     background-color: #122243;
     width: 300px;
     height: 150px;
+}
+
+.contenedor:hover {
+    border: 2px solid white;
 }
 
 form {
@@ -66,7 +72,7 @@ form {
 }
 
 input {
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 
 label{
@@ -87,6 +93,11 @@ label{
 
 .submit-buton {
     border-radius: 6px;
+    border: none;
     width: 50px;
     height: 25px;
+}
+
+.submit-buton:hover {
+    border: 1px solid;
 }

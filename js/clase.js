@@ -10,15 +10,20 @@ let cuentas = [
 ]
 const numeroCuentas = cuentas.length
 
+
 function login(userDom, passDom){
+    let contadorError = 0
     for (let i = 0; i < numeroCuentas; i++){
         if (cuentas[i].nombre == userDom && cuentas[i].paswword == passDom){            
             eliminarElentosHTML()  
             pantallaPrincipal()          
         }
         else {
-            mostrarError()
+           contadorError = contadorError + 1
         }
+    }
+    if (contadorError == numeroCuentas) {
+        mostrarError()
     }
 }
 
@@ -43,9 +48,8 @@ fornmDom.addEventListener('submit', (evento)=> {
 
 function eliminarElentosHTML() {
     let formDom = contenedorDom.querySelector('#formulario') 
-    let errorDelete = bodyDom.querySelector('#errorLogin')
     contenedorDom.removeChild(formDom)
-    bodyDom.removeChild(errorDelete)   
+    
 }
 
 function pantallaPrincipal() {
@@ -73,4 +77,13 @@ function pantallaPrincipal() {
     botonRetiro.classList.add('boton_consulta')  
     botonDeposito.classList.add('boton_consulta')  
     botonSalir.classList.add('boton_consulta')
+
+    botonConsulta.setAttribute('id','btn_consulta')
+    botonRetiro.setAttribute('id','btn_retiro')  
+    botonDeposito.setAttribute('id','btn_deposito')  
+    botonSalir.setAttribute('id','btn_salir') 
+
+    const contenedorDom = document.getElementById("contenedor")
+    console.log(contenedorDom)
 }
+

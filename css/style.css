@@ -24,12 +24,27 @@ body {
     justify-items: auto;
 }
 
+.logo-menu {
+    margin-bottom: 20px;
+    margin-top: 0;   
+    margin-left: -40px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-items: auto;
+}
+
 .logo img {
     width: 180px;
     height: 180px;
     margin-right: 10px;
 }
 
+.logo-menu img {
+    width: 180px;
+    height: 180px;
+    margin-right: 10px;
+}
 .bank-name {
     display: flex;
     flex-direction: column;    
@@ -59,7 +74,7 @@ body {
     height: 150px;
 }
 
-.contenedor-2 {
+.contenedor-menu {
     border: 1px solid rgb(180, 179, 236);    
     border-radius: 6px;
     background-color: #122243;

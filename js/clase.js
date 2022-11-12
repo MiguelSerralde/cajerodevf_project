@@ -1,4 +1,4 @@
-const fornmDom = document.getElementById('formulario')
+const formDom = document.getElementById('formulario')
 const contenedorDom = document.getElementById('contenedor')
 const bodyDom = document.getElementById('principal')
 
@@ -38,7 +38,7 @@ function mostrarError(){
     }, 3000);
 }
 
-fornmDom.addEventListener('submit', (evento)=> {
+formDom.addEventListener('submit', (evento)=> {
     evento.preventDefault()
     let userDom = document.getElementById('user').value
     let passDom = document.getElementById('password').value
@@ -48,16 +48,15 @@ fornmDom.addEventListener('submit', (evento)=> {
 
 function eliminarElentosHTML() {
     let formDom = contenedorDom.querySelector('#formulario') 
-    contenedorDom.removeChild(formDom)
-    
+    contenedorDom.removeChild(formDom)    
 }
 
 function pantallaPrincipal() {
-    document.getElementById('logo').style.marginBottom = '20px'
-    document.getElementById('logo').style.marginTop = '0px'    
+    document.getElementById('logo').classList.remove('logo')
+    document.getElementById('logo').classList.add('logo-menu')    
     document.getElementById('contenedor').classList.remove('contenedor')
-    document.getElementById('contenedor').classList.add('contenedor-2')
-
+    document.getElementById('contenedor').classList.add('contenedor-menu')
+        
     const botonConsulta = document.createElement('button')
     const botonRetiro = document.createElement('button')
     const botonDeposito = document.createElement('button')
@@ -82,8 +81,63 @@ function pantallaPrincipal() {
     botonRetiro.setAttribute('id','btn_retiro')  
     botonDeposito.setAttribute('id','btn_deposito')  
     botonSalir.setAttribute('id','btn_salir') 
+    botonSalir.setAttribute('type','submit') 
 
-    const contenedorDom = document.getElementById("contenedor")
-    console.log(contenedorDom)
+    const btnSalirDom = document.getElementById("btn_salir")  
+    btnSalirDom.addEventListener('click', (evento)=> {            
+        salirMenuPrincipal()
+    })  
+    
+    const btn_RetiroDom = document.getElementById("btn_retiro")
+    btn_RetiroDom.addEventListener('click', (evento)=> {
+        reritoPantalla()
+    })
+
+    const btn_ConsultaDom = document.getElementById("btn_consulta")
+    btn_ConsultaDom.addEventListener('click', (evnto)=> {
+        consultaPantalla()
+    })
+
+    const btn_DepositoDom = document.getElementById("btn_deposito")
+    btn_DepositoDom.addEventListener('click', (evento)=> {
+        depositoPantalla()
+    })
 }
 
+function salirMenuPrincipal(){    
+    removeElementsMenu()
+
+    document.getElementById('contenedor').classList.remove('contenedor-menu')
+    document.getElementById('contenedor').classList.add('contenedor')
+    document.getElementById('logo').classList.remove('logo-menu')
+    document.getElementById('logo').classList.add('logo') 
+
+    document.getElementById('contenedor').appendChild(formDom)     
+    document.getElementById('user').value=''
+    document.getElementById('password').value=''
+}
+
+function removeElementsMenu(){
+    const contenedorMenuPrincipalDom = document.getElementById('contenedor')
+    const btnRetiroRemove = document.getElementById('btn_retiro')
+    const btnConsultaRemove = document.getElementById('btn_consulta')
+    const btnDepositoRemove = document.getElementById('btn_deposito')
+    const btnSalirRemove = document.getElementById('btn_salir')
+
+    contenedorMenuPrincipalDom.removeChild(btnSalirRemove)
+    contenedorMenuPrincipalDom.removeChild(btnRetiroRemove)
+    contenedorMenuPrincipalDom.removeChild(btnConsultaRemove)
+    contenedorMenuPrincipalDom.removeChild(btnDepositoRemove)
+}
+
+function reritoPantalla(){
+    removeElementsMenu()
+}
+
+function consultaPantalla(){
+    removeElementsMenu()
+}
+
+function depositoPantalla(){
+    removeElementsMenu()
+}

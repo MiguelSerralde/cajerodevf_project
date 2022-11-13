@@ -137,13 +137,15 @@ function reritoPantalla(i){
     const botonRegresar = document.createElement('button')
     const formBtn = document.createElement('form')
     const inputRetiro = document.createElement('input')
-    const errorRetiro = document.createElement('span')
+    const errorMonto = document.createElement('span')
 
-    document.getElementById('contenedor').appendChild(labelIndicaciones)
+    document.getElementById('contenedor').appendChild(errorMonto)
+    document.getElementById('contenedor').appendChild(labelIndicaciones)    
     document.getElementById('contenedor').appendChild(inputRetiro)
     document.getElementById('contenedor').appendChild(formBtn)
+    
     formBtn.setAttribute('id', 'botones')
-    errorRetiro.setAttribute('id', 'errorRetiro')
+    errorMonto.setAttribute('id', 'errorMonto')
     
     document.getElementById('botones').appendChild(botonAceptar)
     document.getElementById('botones').appendChild(botonRegresar)
@@ -153,7 +155,7 @@ function reritoPantalla(i){
     botonAceptar.classList.add('boton_consulta')
     botonRegresar.classList.add('boton_consulta')
     labelIndicaciones.classList.add('label_consulta')
-    errorRetiro.classList.add('hide')
+    errorMonto.classList.add('hide')
        
     inputRetiro.setAttribute('id','montoRetiro')
     inputRetiro.setAttribute('type', 'number')
@@ -164,6 +166,7 @@ function reritoPantalla(i){
     inputRetiro.value = 0  
     botonRegresar.innerText = 'Regresar'
     botonAceptar.innerText = 'Aceptar'   
+    errorMonto.innerText = 'Monto a retirar no permitido'
    
     let btnAceptarDom = document.getElementById('montoRetiro')        
     document.getElementById('contenedor').addEventListener('submit', (evento)=> {
@@ -171,13 +174,10 @@ function reritoPantalla(i){
         let montoRetiroValor = inputRetiro.value        
         if ((cuentas[i].saldo - montoRetiroValor) < 10) {            
             inputRetiro.value = 0     
-            errorRetiro.classList.remove('hide')     
-            errorRetiro.classList.add('error')
-            console.log(errorRetiro)            
+            mostrarErrorMonto()          
         }    
         else{
-            cuentas[i].saldo = cuentas[i].saldo - montoRetiroValor
-            console.log( cuentas[i].saldo )
+            cuentas[i].saldo = cuentas[i].saldo - montoRetiroValor              
             inputRetiro.value = 0
         }
     })
@@ -186,7 +186,8 @@ function reritoPantalla(i){
     btn_regresarDom.addEventListener('click', (evento)=> {        
         document.getElementById('contenedor').removeChild(inputRetiro)
         document.getElementById('contenedor').removeChild(formBtn)
-        document.getElementById('contenedor').removeChild(labelIndicaciones)        
+        document.getElementById('contenedor').removeChild(labelIndicaciones)
+        document.getElementById('contenedor').removeChild(errorMonto)
         pantallaPrincipal(i)
      })
 }
@@ -221,13 +222,15 @@ function consultaPantalla(i){
 }
 
 function depositoPantalla(i){
-    removeElementsMenu()
+    removeElementsMenu()    
     const labelIndicaciones = document.createElement('label')
     const botonAceptar = document.createElement('button')
     const botonRegresar = document.createElement('button')
     const formBtn = document.createElement('form')
     const inputDeposito = document.createElement('input')
+    const errorMonto = document.createElement('span')
 
+    document.getElementById('contenedor').appendChild(errorMonto)
     document.getElementById('contenedor').appendChild(labelIndicaciones)
     document.getElementById('contenedor').appendChild(inputDeposito)
     document.getElementById('contenedor').appendChild(formBtn)
@@ -235,31 +238,33 @@ function depositoPantalla(i){
     
     document.getElementById('botones').appendChild(botonAceptar)
     document.getElementById('botones').appendChild(botonRegresar)
+    errorMonto.setAttribute('id', 'errorMonto')
     
     inputDeposito.classList.add('text_monto')
     formBtn.classList.add('botones_menu')
     botonAceptar.classList.add('boton_consulta')
     botonRegresar.classList.add('boton_consulta')
     labelIndicaciones.classList.add('label_consulta')
+    errorMonto.classList.add('hide')
        
     inputDeposito.setAttribute('id','montoDeposito')
     inputDeposito.setAttribute('type', 'number')
     botonRegresar.setAttribute('id','btnC_Regresar')
     botonAceptar.setAttribute('type', 'submit')
+    errorMonto.setAttribute('id', 'errorMonto')
 
     labelIndicaciones.innerText =  'Teclee Monto a Retirar' 
     inputDeposito.value = 0  
     botonRegresar.innerText = 'Regresar'
     botonAceptar.innerText = 'Aceptar'   
+    errorMonto.setAttribute = 'Monto a depositar no permitido'
    
-    let btnAceptarDom = document.getElementById('montoDeposito')    
-    console.log(btnAceptarDom)
+    let btnAceptarDom = document.getElementById('montoDeposito')        
     document.getElementById('contenedor').addEventListener('submit', (evento)=> {
         evento.preventDefault()
-        let montoDepositoValor = inputDeposito.value        
-        console.log(cuentas[i].saldo + parseInt(montoDepositoValor), parseInt(montoDepositoValor))
-        if ((cuentas[i].saldo + parseInt(montoDepositoValor,8)) > 990) {
-            alert("Monto no permitido")    
+        let montoDepositoValor = inputDeposito.value                
+        if ((cuentas[i].saldo + parseInt(montoDepositoValor)) > 990) {
+            mostrarErrorMonto()   
             inputDeposito.value = 0        
         }    
         else{
@@ -272,7 +277,19 @@ function depositoPantalla(i){
     btn_regresarDom.addEventListener('click', (evento)=> {        
         document.getElementById('contenedor').removeChild(inputDeposito)
         document.getElementById('contenedor').removeChild(formBtn)
-        document.getElementById('contenedor').removeChild(labelIndicaciones)        
+        document.getElementById('contenedor').removeChild(labelIndicaciones)
+        document.getElementById('contenedor').removeChild(errorMonto)
         pantallaPrincipal(i)
      })
+}
+
+function mostrarErrorMonto(){
+    let error = document.getElementById('errorMonto')    
+    error.classList.remove("hide")
+    error.classList.add("error_monto")
+
+    setInterval(function errorTime(){
+        error.classList.remove('error_monto')
+        error.classList.add('hide')
+    }, 3000);
 }

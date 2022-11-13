@@ -173,3 +173,12 @@ label{
 .text_monto:hover {
     border: 1px solid;
 }
+
+.error_monto {
+    position: absolute;
+    margin-top: -300px;
+    margin-bottom: 0;
+    color: red;    
+    font-weight: bold;
+    font-size: 28px;    
+}

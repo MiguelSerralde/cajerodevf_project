@@ -15,8 +15,9 @@ function login(userDom, passDom){
     let contadorError = 0
     for (let i = 0; i < numeroCuentas; i++){
         if (cuentas[i].nombre == userDom && cuentas[i].paswword == passDom){            
+            const eleimentoID = i
             eliminarElentosHTML()  
-            pantallaPrincipal()          
+            pantallaPrincipal(i)          
         }
         else {
            contadorError = contadorError + 1
@@ -51,7 +52,7 @@ function eliminarElentosHTML() {
     contenedorDom.removeChild(formDom)    
 }
 
-function pantallaPrincipal() {
+function pantallaPrincipal(i) {
     document.getElementById('logo').classList.remove('logo')
     document.getElementById('logo').classList.add('logo-menu')    
     document.getElementById('contenedor').classList.remove('contenedor')
@@ -80,8 +81,7 @@ function pantallaPrincipal() {
     botonConsulta.setAttribute('id','btn_consulta')
     botonRetiro.setAttribute('id','btn_retiro')  
     botonDeposito.setAttribute('id','btn_deposito')  
-    botonSalir.setAttribute('id','btn_salir') 
-    botonSalir.setAttribute('type','submit') 
+    botonSalir.setAttribute('id','btn_salir')     
 
     const btnSalirDom = document.getElementById("btn_salir")  
     btnSalirDom.addEventListener('click', (evento)=> {            
@@ -90,17 +90,17 @@ function pantallaPrincipal() {
     
     const btn_RetiroDom = document.getElementById("btn_retiro")
     btn_RetiroDom.addEventListener('click', (evento)=> {
-        reritoPantalla()
+        reritoPantalla(i)
     })
 
     const btn_ConsultaDom = document.getElementById("btn_consulta")
     btn_ConsultaDom.addEventListener('click', (evnto)=> {
-        consultaPantalla()
+        consultaPantalla(i)
     })
 
     const btn_DepositoDom = document.getElementById("btn_deposito")
     btn_DepositoDom.addEventListener('click', (evento)=> {
-        depositoPantalla()
+        depositoPantalla(i)
     })
 }
 
@@ -130,12 +130,73 @@ function removeElementsMenu(){
     contenedorMenuPrincipalDom.removeChild(btnDepositoRemove)
 }
 
-function reritoPantalla(){
+function reritoPantalla(i){
     removeElementsMenu()
+    const labelIndicaciones = document.createElement('label')
+    const botonAceptar = document.createElement('button')
+    const botonRegresar = document.createElement('button')
+    const divBtn = document.createElement('div')
+    const inputRetiro = document.createElement('input')
+
+    document.getElementById('contenedor').appendChild(labelIndicaciones)
+    document.getElementById('contenedor').appendChild(inputRetiro)
+    document.getElementById('contenedor').appendChild(divBtn)
+    divBtn.setAttribute('id', 'botones')
+    
+    document.getElementById('botones').appendChild(botonAceptar)
+    document.getElementById('botones').appendChild(botonRegresar)
+    
+    inputRetiro.classList.add('text_monto')
+    divBtn.classList.add('botones_menu')
+    botonAceptar.classList.add('boton_consulta')
+    botonRegresar.classList.add('boton_consulta')
+    labelIndicaciones.classList.add('label_consulta')
+       
+    inputRetiro.setAttribute('id','montoRetiro')
+    inputRetiro.setAttribute('type', 'number')
+    botonRegresar.setAttribute('id','btnC_Regresar')
+
+    labelIndicaciones.innerText =  'Teclee Monto a Retirar'
+    inputRetiro.value = '0'
+    botonRegresar.innerText = 'Regresar'
+    botonAceptar.innerText = 'Aceptar'
+
+    const btn_regresarDom = document.getElementById("btnC_Regresar")
+    btn_regresarDom.addEventListener('click', (evento)=> {
+        document.getElementById('contenedor').removeChild(inputRetiro)
+        document.getElementById('contenedor').removeChild(divBtn)
+        document.getElementById('contenedor').removeChild(labelIndicaciones)        
+        pantallaPrincipal(i)
+     })
 }
 
-function consultaPantalla(){
+function consultaPantalla(i){
     removeElementsMenu()
+    const labelConsultaSaldo = document.createElement('label')
+    const botonRegresar = document.createElement('button')
+    const saldo = document.createElement('span')
+
+    document.getElementById('contenedor').appendChild(labelConsultaSaldo)
+    document.getElementById('contenedor').appendChild(saldo)
+    document.getElementById('contenedor').appendChild(botonRegresar)
+
+    botonRegresar.classList.add('boton_consulta')
+    labelConsultaSaldo.classList.add('label_consulta')
+    saldo.classList.add('saldo')
+
+    labelConsultaSaldo.innerText = 'Tu Saldo: '
+    saldo.innerText ='$' + cuentas[i].saldo
+
+    botonRegresar.setAttribute('id','btnC_Regresar')
+    botonRegresar.innerText = 'Regresar'
+
+    const btn_regresarDom = document.getElementById("btnC_Regresar")
+    btn_regresarDom.addEventListener('click', (evento)=> {
+        document.getElementById('contenedor').removeChild(botonRegresar)
+        document.getElementById('contenedor').removeChild(labelConsultaSaldo)
+        document.getElementById('contenedor').removeChild(saldo)
+        pantallaPrincipal(i)
+     })
 }
 
 function depositoPantalla(){

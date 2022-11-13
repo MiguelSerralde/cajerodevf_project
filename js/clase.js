@@ -137,11 +137,13 @@ function reritoPantalla(i){
     const botonRegresar = document.createElement('button')
     const formBtn = document.createElement('form')
     const inputRetiro = document.createElement('input')
+    const errorRetiro = document.createElement('span')
 
     document.getElementById('contenedor').appendChild(labelIndicaciones)
     document.getElementById('contenedor').appendChild(inputRetiro)
     document.getElementById('contenedor').appendChild(formBtn)
     formBtn.setAttribute('id', 'botones')
+    errorRetiro.setAttribute('id', 'errorRetiro')
     
     document.getElementById('botones').appendChild(botonAceptar)
     document.getElementById('botones').appendChild(botonRegresar)
@@ -151,6 +153,7 @@ function reritoPantalla(i){
     botonAceptar.classList.add('boton_consulta')
     botonRegresar.classList.add('boton_consulta')
     labelIndicaciones.classList.add('label_consulta')
+    errorRetiro.classList.add('hide')
        
     inputRetiro.setAttribute('id','montoRetiro')
     inputRetiro.setAttribute('type', 'number')
@@ -162,14 +165,15 @@ function reritoPantalla(i){
     botonRegresar.innerText = 'Regresar'
     botonAceptar.innerText = 'Aceptar'   
    
-    let btnAceptarDom = document.getElementById('montoRetiro')    
-    console.log(btnAceptarDom)
+    let btnAceptarDom = document.getElementById('montoRetiro')        
     document.getElementById('contenedor').addEventListener('submit', (evento)=> {
         evento.preventDefault()        
-        let montoRetiroValor = document.getElementById('montoRetiro').value        
-        if ((cuentas[i].saldo - montoRetiroValor) < 10) {
-            alert("Monto no permitido")  
-            inputRetiro.value = 0          
+        let montoRetiroValor = inputRetiro.value        
+        if ((cuentas[i].saldo - montoRetiroValor) < 10) {            
+            inputRetiro.value = 0     
+            errorRetiro.classList.remove('hide')     
+            errorRetiro.classList.add('error')
+            console.log(errorRetiro)            
         }    
         else{
             cuentas[i].saldo = cuentas[i].saldo - montoRetiroValor
@@ -252,7 +256,7 @@ function depositoPantalla(i){
     console.log(btnAceptarDom)
     document.getElementById('contenedor').addEventListener('submit', (evento)=> {
         evento.preventDefault()
-        let montoDepositoValor = document.getElementById('montoDeposito').value        
+        let montoDepositoValor = inputDeposito.value        
         console.log(cuentas[i].saldo + parseInt(montoDepositoValor), parseInt(montoDepositoValor))
         if ((cuentas[i].saldo + parseInt(montoDepositoValor,8)) > 990) {
             alert("Monto no permitido")    

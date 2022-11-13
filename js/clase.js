@@ -135,19 +135,19 @@ function reritoPantalla(i){
     const labelIndicaciones = document.createElement('label')
     const botonAceptar = document.createElement('button')
     const botonRegresar = document.createElement('button')
-    const divBtn = document.createElement('div')
+    const formBtn = document.createElement('form')
     const inputRetiro = document.createElement('input')
 
     document.getElementById('contenedor').appendChild(labelIndicaciones)
     document.getElementById('contenedor').appendChild(inputRetiro)
-    document.getElementById('contenedor').appendChild(divBtn)
-    divBtn.setAttribute('id', 'botones')
+    document.getElementById('contenedor').appendChild(formBtn)
+    formBtn.setAttribute('id', 'botones')
     
     document.getElementById('botones').appendChild(botonAceptar)
     document.getElementById('botones').appendChild(botonRegresar)
     
     inputRetiro.classList.add('text_monto')
-    divBtn.classList.add('botones_menu')
+    formBtn.classList.add('botones_menu')
     botonAceptar.classList.add('boton_consulta')
     botonRegresar.classList.add('boton_consulta')
     labelIndicaciones.classList.add('label_consulta')
@@ -155,16 +155,30 @@ function reritoPantalla(i){
     inputRetiro.setAttribute('id','montoRetiro')
     inputRetiro.setAttribute('type', 'number')
     botonRegresar.setAttribute('id','btnC_Regresar')
+    botonAceptar.setAttribute('type', 'submit')
 
-    labelIndicaciones.innerText =  'Teclee Monto a Retirar'
-    inputRetiro.value = '0'
+    labelIndicaciones.innerText =  'Teclee Monto a Retirar' 
+    inputRetiro.value = 0  
     botonRegresar.innerText = 'Regresar'
-    botonAceptar.innerText = 'Aceptar'
+    botonAceptar.innerText = 'Aceptar'   
+   
+    let btnAceptarDom = document.getElementById('montoRetiro')    
+    console.log(btnAceptarDom)
+    document.getElementById('contenedor').addEventListener('submit', (evento)=> {
+        evento.preventDefault()
+        let montoRetiroValor = document.getElementById('montoRetiro').value
+        if ((cuentas[i].saldo - montoRetiroValor) < 0) {
+            alert("Monto no permitido")
+        }    
+        else{
+            cuentas[i].saldo = cuentas[i].saldo - montoRetiroValor
+        }
+    })
 
     const btn_regresarDom = document.getElementById("btnC_Regresar")
-    btn_regresarDom.addEventListener('click', (evento)=> {
+    btn_regresarDom.addEventListener('click', (evento)=> {        
         document.getElementById('contenedor').removeChild(inputRetiro)
-        document.getElementById('contenedor').removeChild(divBtn)
+        document.getElementById('contenedor').removeChild(formBtn)
         document.getElementById('contenedor').removeChild(labelIndicaciones)        
         pantallaPrincipal(i)
      })

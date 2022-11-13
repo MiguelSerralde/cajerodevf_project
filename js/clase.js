@@ -165,13 +165,16 @@ function reritoPantalla(i){
     let btnAceptarDom = document.getElementById('montoRetiro')    
     console.log(btnAceptarDom)
     document.getElementById('contenedor').addEventListener('submit', (evento)=> {
-        evento.preventDefault()
-        let montoRetiroValor = document.getElementById('montoRetiro').value
-        if ((cuentas[i].saldo - montoRetiroValor) < 0) {
-            alert("Monto no permitido")
+        evento.preventDefault()        
+        let montoRetiroValor = document.getElementById('montoRetiro').value        
+        if ((cuentas[i].saldo - montoRetiroValor) < 10) {
+            alert("Monto no permitido")  
+            inputRetiro.value = 0          
         }    
         else{
             cuentas[i].saldo = cuentas[i].saldo - montoRetiroValor
+            console.log( cuentas[i].saldo )
+            inputRetiro.value = 0
         }
     })
 
@@ -213,6 +216,59 @@ function consultaPantalla(i){
      })
 }
 
-function depositoPantalla(){
+function depositoPantalla(i){
     removeElementsMenu()
+    const labelIndicaciones = document.createElement('label')
+    const botonAceptar = document.createElement('button')
+    const botonRegresar = document.createElement('button')
+    const formBtn = document.createElement('form')
+    const inputDeposito = document.createElement('input')
+
+    document.getElementById('contenedor').appendChild(labelIndicaciones)
+    document.getElementById('contenedor').appendChild(inputDeposito)
+    document.getElementById('contenedor').appendChild(formBtn)
+    formBtn.setAttribute('id', 'botones')
+    
+    document.getElementById('botones').appendChild(botonAceptar)
+    document.getElementById('botones').appendChild(botonRegresar)
+    
+    inputDeposito.classList.add('text_monto')
+    formBtn.classList.add('botones_menu')
+    botonAceptar.classList.add('boton_consulta')
+    botonRegresar.classList.add('boton_consulta')
+    labelIndicaciones.classList.add('label_consulta')
+       
+    inputDeposito.setAttribute('id','montoDeposito')
+    inputDeposito.setAttribute('type', 'number')
+    botonRegresar.setAttribute('id','btnC_Regresar')
+    botonAceptar.setAttribute('type', 'submit')
+
+    labelIndicaciones.innerText =  'Teclee Monto a Retirar' 
+    inputDeposito.value = 0  
+    botonRegresar.innerText = 'Regresar'
+    botonAceptar.innerText = 'Aceptar'   
+   
+    let btnAceptarDom = document.getElementById('montoDeposito')    
+    console.log(btnAceptarDom)
+    document.getElementById('contenedor').addEventListener('submit', (evento)=> {
+        evento.preventDefault()
+        let montoDepositoValor = document.getElementById('montoDeposito').value        
+        console.log(cuentas[i].saldo + parseInt(montoDepositoValor), parseInt(montoDepositoValor))
+        if ((cuentas[i].saldo + parseInt(montoDepositoValor,8)) > 990) {
+            alert("Monto no permitido")    
+            inputDeposito.value = 0        
+        }    
+        else{
+            cuentas[i].saldo = cuentas[i].saldo + parseInt(montoDepositoValor)
+            inputDeposito.value = 0
+        }
+    })
+
+    const btn_regresarDom = document.getElementById("btnC_Regresar")
+    btn_regresarDom.addEventListener('click', (evento)=> {        
+        document.getElementById('contenedor').removeChild(inputDeposito)
+        document.getElementById('contenedor').removeChild(formBtn)
+        document.getElementById('contenedor').removeChild(labelIndicaciones)        
+        pantallaPrincipal(i)
+     })
 }

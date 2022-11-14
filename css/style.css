@@ -182,3 +182,42 @@ label{
     font-weight: bold;
     font-size: 28px;    
 }
+
+@media (max-width: 340px){
+    .logo {
+        margin-top: -150px;
+        margin-bottom: 100px;
+        margin-left: -40px;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-items: auto;
+    }
+    
+    .logo img {
+        width: 120px;
+        height: 120px;
+        margin-right: 10px;
+    }
+
+    .bank-name {
+        display: flex;
+        flex-direction: column;    
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .bank-name h2 {
+        align-self: flex-start;
+        font-size: 36px; 
+        font-style: italic;   
+        font-weight: bolder;
+        text-shadow: 1px 2px #123464;
+    }
+    
+    .bank-name p{
+        align-self: flex-start;
+        font-style: unset;
+        color:#3CB1F3;
+    }
+}

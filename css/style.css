@@ -248,7 +248,7 @@ label{
     }
     
     .text_monto {
-        border-top: -50px;
+        margin-top: -30px;
         background-color: #122243;
         font-size: 22px;
         color: white;
@@ -268,5 +268,6 @@ label{
 
     .label_consulta {
         font-size: 24px;
+        margin-bottom: 30px;
     }
 }

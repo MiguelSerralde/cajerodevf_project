@@ -4,7 +4,7 @@ const bodyDom = document.getElementById('principal')
 
 let cuentas = [
     {nombre: 'Mali', paswword: '123', saldo: 200},
-    {nombre: 'Gera', paswword: '321', saldo: 290},
+    {nombre: 'Gera', paswword: '123', saldo: 290},
     {nombre: 'Maui', paswword: '123', saldo: 67},
     {nombre: 'Miguel', paswword: '123', saldo: 67}    
 ]
